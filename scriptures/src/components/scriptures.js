@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
-import {loadScriptures, addScriptures, logout, deleteScripture, updateScripture} from '../components/actions';
+import {loadScriptures, addScriptures, logout, deleteScripture, updateScripture} from './actions';
 
 
 const Scriptures = ({id, loadScriptures, scriptures, addScriptures, logout, history, deleteScripture, updateScripture}) => {
@@ -11,7 +11,7 @@ const Scriptures = ({id, loadScriptures, scriptures, addScriptures, logout, hist
         localStorage.removeItem('user')
     }
 
-    const [scriptureForm, setScriptureForm] = useState({book: '', chapter: '', verse: ''});
+    const [scriptureForm, setScriptureForm] = useState({book: '', chapter: '', verse: '', passage: ''});
     const [editScripture, setEditScripture] = useState(null)
 
     const handleChange = e => {
@@ -39,7 +39,8 @@ const Scriptures = ({id, loadScriptures, scriptures, addScriptures, logout, hist
             setScriptureForm({
                 book: editScripture.book, 
                 chapter: editScripture.chapter, 
-                verse: editScripture.verse})
+                verse: editScripture.verse,
+                passage: editScripture.passage})
         }
     }, [editScripture])
 
@@ -51,6 +52,9 @@ const Scriptures = ({id, loadScriptures, scriptures, addScriptures, logout, hist
                     <input type="text" name= 'book' value={scriptureForm.book} onChange={handleChange} placeholder = 'Book'/>
                     <input type="text" name= 'chapter' value={scriptureForm.chapter} onChange={handleChange} placeholder = 'Chapter'/>
                     <input type="text" name= 'verse' value={scriptureForm.verse} onChange={handleChange} placeholder = 'Verse'/>
+                    <input type="text" name='passage' value={scriptureForm.passage}
+                    onChange={handleChange}
+                    placeholder='Passage'/>
                     <div>
                         <button type='submit'>Submit</button>
                         <button onClick={() => {handleLogout()}}>Logout</button>
